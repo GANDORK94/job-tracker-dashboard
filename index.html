@@ -1,112 +1,13 @@
-# Job Application Tracker Dashboard
-
-Live dashboard that syncs with Gmail to track job applications, interviews, rejections, and response rates.
-
-![Dashboard Preview](https://img.shields.io/badge/React-Vite-blue) ![Deploy](https://img.shields.io/badge/Deploy-Vercel-black)
-
-## Features
-
-- **Live Gmail sync** via Anthropic API + Gmail MCP
-- **Auto-classification** of applications into Interview / Viewed / Applied / Rejected
-- **4-month stale rule** — pending apps older than 4 months auto-marked as "No Response"
-- **Source tracking** — LinkedIn, Direct, ZipRecruiter, Indeed
-- **Glassmorphism UI** with sage/blue palette
-- Search, filter by status/source, sort by date/company/status
-
----
-
-## Deploy to Vercel (Recommended — 5 minutes)
-
-### Step 1: Push to GitHub
-
-```bash
-# In terminal, navigate to this folder
-cd job-tracker
-
-# Initialize git
-git init
-git add .
-git commit -m "Initial commit - job tracker dashboard"
-
-# Create repo on GitHub (or use GitHub CLI)
-# Go to github.com/new → create "job-tracker-dashboard" → DON'T add README
-git remote add origin https://github.com/YOUR_USERNAME/job-tracker-dashboard.git
-git branch -M main
-git push -u origin main
-```
-
-### Step 2: Deploy on Vercel
-
-1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
-2. Click **"Add New Project"**
-3. Import your `job-tracker-dashboard` repo
-4. Framework Preset: **Vite** (should auto-detect)
-5. Before deploying, add your environment variable:
-   - Click **"Environment Variables"**
-   - Name: `ANTHROPIC_API_KEY`
-   - Value: your Anthropic API key from [console.anthropic.com](https://console.anthropic.com)
-6. Click **Deploy**
-
-Your dashboard will be live at `https://job-tracker-dashboard.vercel.app` (or similar).
-
-### Step 3: Hit "Sync Gmail"
-
-The Sync Gmail button calls the Anthropic API through a serverless function (`/api/claude.js`) which keeps your API key safe on the server.
-
-> **Note on Gmail access:** The Gmail MCP integration works when the Anthropic API has access to your Gmail MCP server. If Gmail sync doesn't connect from Vercel, the dashboard still works perfectly with your cached application data. You can also manually update the `FALLBACK_DATA` array in `src/App.jsx` to keep it current.
-
----
-
-## Local Development
-
-```bash
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173`
-
-For local Gmail sync, create `.env.local`:
-```
-ANTHROPIC_API_KEY=sk-ant-...
-```
-
----
-
-## Updating Your Applications
-
-**Option A: Gmail Sync** — Hit the Sync Gmail button (requires Anthropic API key)
-
-**Option B: Manual Update** — Edit the `FALLBACK_DATA` array at the bottom of `src/App.jsx`. Add new entries like:
-
-```js
-{ company: "CompanyName", role: "Job Title", status: "pending", date: "2026-03-20", source: "linkedin", note: "Applied via LinkedIn" },
-```
-
-Status options: `"interview"`, `"rejected"`, `"viewed"`, `"pending"`
-Source options: `"linkedin"`, `"direct"`, `"ziprecruiter"`, `"indeed"`
-
----
-
-## Project Structure
-
-```
-job-tracker/
-├── api/
-│   └── claude.js          # Vercel serverless function (API proxy)
-├── public/
-├── src/
-│   ├── App.jsx            # Dashboard component (all logic here)
-│   └── main.jsx           # React entry point
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-## Tech Stack
-
-- **React 18** + **Vite**
-- **Anthropic API** (Claude Sonnet) for email classification
-- **Gmail MCP** for email fetching
-- **Vercel** for hosting + serverless functions
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Tracker</title>
+    <style>body { margin: 0; }</style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
